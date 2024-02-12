@@ -1,0 +1,30 @@
+{
+  "name": "blur-focus",
+  "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
+  "version": "1.0",
+  "manifest_version": 3,
+
+  "action": {
+    "default_icon": "images/icon-x128.png",
+    "default_popup": "popup.html"
+  },
+
+  "content_scripts": [
+      {
+          "matches": ["<all_urls>"],
+          "js": ["js/vendor.js", "js/content_script.js"]
+      }
+  ],
+
+  "background": {
+    "service_worker": "js/background.js"
+  },
+
+  "permissions": [
+    "storage"
+  ],
+
+  "host_permissions": [
+    "<all_urls>"
+  ]
+}
