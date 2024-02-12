@@ -8,7 +8,7 @@ Chrome拡張機能。有効にしている間、ホバーしているテキス�
 Search: [chrome://extensions/](chrome://extensions/) or [edge://extensions/](edge://extensions/) (Chromium製ブラウザであれば動作します。)
 1. 開発者モードを有効にする
 2. `パッケージ化されていない拡張機能を読み込む` をクリック
-3. `BlurFocus/dist` フォルダを選択
+3. `blur-focus/dist` フォルダを選択
 
 ## Known issues
 - 動的に生成される要素には対応していません。
