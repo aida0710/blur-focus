@@ -30,12 +30,33 @@ const Popup = () => {
                 {isBlur ? "Blurred" : "Unblurred"} Text
             </h1>
             <p>※ ページをリロードする必要があります。</p>
-            <button
-                onClick={handleClick}
-                style={{marginRight: "5px"}}
-            >
-                {isBlur ? "Unblur" : "Blur"}
-            </button>
+            <div style={{
+                display: "flex",
+                flexDirection: "row",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "100%",
+            }}>
+                <button
+                    onClick={handleClick}
+                    style={{marginRight: "5px"}}
+                >
+                    {isBlur ? "Blurを無くす" : "Blurを掛ける"}
+                </button>
+                <button
+                    style={{marginRight: "5px"}}
+                    onClick={(): void => {
+                        chrome.tabs.reload().then();
+                    }}>Pageをリロード
+                </button>
+            </div>
+            <p style={{
+                borderBottom: "1px solid #000",
+                width: "100%",
+                paddingTop: "5px",
+                margin: "5px",
+            }}>Settings</p>
+            <p>※ 未実装機能です。</p>
         </div>
     );
 };
