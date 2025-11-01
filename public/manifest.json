@@ -16,13 +16,20 @@
       }
   ],
 
-  "background": {
-    "service_worker": "js/background.js"
-  },
-
   "permissions": [
-    "storage"
+    "storage",
+    "activeTab",
+    "tabs"
   ],
+
+  "commands": {
+    "_execute_action": {
+      "suggested_key": {
+        "default": "Ctrl+Shift+B",
+        "mac": "Command+Shift+B"
+      }
+    }
+  },
 
   "host_permissions": [
     "<all_urls>"

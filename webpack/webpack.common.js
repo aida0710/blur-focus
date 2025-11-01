@@ -6,7 +6,6 @@ const srcDir = path.join(__dirname, "..", "src");
 module.exports = {
     entry: {
       popup: path.join(srcDir, 'popup.tsx'),
-      background: path.join(srcDir, 'background.ts'),
       content_script: path.join(srcDir, 'content_script.tsx'),
     },
     output: {
@@ -16,9 +15,7 @@ module.exports = {
     optimization: {
         splitChunks: {
             name: "vendor",
-            chunks(chunk) {
-              return chunk.name !== 'background';
-            }
+            chunks: "all",
         },
     },
     module: {
@@ -27,6 +24,10 @@ module.exports = {
                 test: /\.tsx?$/,
                 use: "ts-loader",
                 exclude: /node_modules/,
+            },
+            {
+                test: /\.css$/,
+                use: ["style-loader", "css-loader"],
             },
         ],
     },
