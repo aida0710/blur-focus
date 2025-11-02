@@ -1,6 +1,6 @@
 {
   "name": "blur-focus",
-  "version": "2.0.3",
+  "version": "2.0.4",
   "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
   "main": "index.js",
   "scripts": {
@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/chibat/chrome-extension-typescript-starter.git"
+    "url": "https://github.com:aida0710/blur-focus.git"
   },
   "dependencies": {
     "react": "^18.2.0",
