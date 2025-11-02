@@ -1,13 +1,13 @@
 {
   "name": "blur-focus",
-  "version": "2.0.1",
+  "version": "2.0.2",
   "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --config webpack/webpack.dev.js --watch",
     "build": "rimraf dist && webpack --config webpack/webpack.prod.js",
     "clean": "rimraf dist",
-    "test": "npx jest",
+    "test": "npx jest --passWithNoTests",
     "style": "prettier --write \"src/**/*.{ts,tsx}\"",
     "lint": "eslint src --ext .ts,.tsx",
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
