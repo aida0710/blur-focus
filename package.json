@@ -1,7 +1,7 @@
 {
-  "name": "blur-focus",
-  "version": "2.0.4",
-  "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
+  "name": "Blur Focus",
+  "version": "2.0.5",
+  "description": "ホバーしているテキスト以外をぼかすことで、読書中の視線の滑りを防ぎ、集中力を高めるChrome拡張機能",
   "main": "index.js",
   "scripts": {
     "watch": "webpack --config webpack/webpack.dev.js --watch",
@@ -13,7 +13,7 @@
     "lint:fix": "eslint src --ext .ts,.tsx --fix",
     "type-check": "tsc --noEmit"
   },
-  "author": "",
+  "author": "aida0710",
   "license": "MIT",
   "repository": {
     "type": "git",

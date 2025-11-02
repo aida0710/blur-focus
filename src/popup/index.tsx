@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { createRoot, Root } from 'react-dom/client';
 import { SettingsPanel } from './components/SettingsPanel';
-import { BlurSettings, Message } from './types';
+import { BlurSettings, Message } from '../types';
 import './styles/popup.css';
 
 const Popup = () => {

@@ -1,12 +1,15 @@
 import React, { useState, useEffect } from 'react';
-import { BlurSettings, DEFAULT_SETTINGS, SiteRule } from '../types';
+import { BlurSettings, DEFAULT_SETTINGS, SiteRule } from '../../types';
+import { IntensityTab } from './IntensityTab';
+import { ElementsTab } from './ElementsTab';
+import { SitesTab } from './SitesTab';
 
 interface SettingsPanelProps {
   onSettingsChange: (settings: Partial<BlurSettings>) => void;
 }
 
 /**
- * 設定パネルコンポーネント
+ * 設定パネルコンポーネント（タブコンテナ）
  */
 export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onSettingsChange }) => {
   const [blurIntensity, setBlurIntensity] = useState(DEFAULT_SETTINGS.blurIntensity);
@@ -93,9 +96,6 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onSettingsChange }
     });
   };
 
-  // 全要素タイプのリスト
-  const allElementTypes = ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'span', 'ul', 'li', 'label', 'code'];
-
   return (
     <div className="settings-panel">
       <div className="settings-tabs">
@@ -120,105 +120,30 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({ onSettingsChange }
       </div>
 
       <div className="settings-content">
-        {/* ブラー強度設定 */}
         {currentTab === 'intensity' && (
-          <div className="setting-section">
-            <label className="setting-label">
-              ブラー強度: {blurIntensity}px
-            </label>
-            <input
-              type="range"
-              min="2"
-              max="15"
-              value={blurIntensity}
-              onChange={(e) => handleIntensityChange(Number(e.target.value))}
-              className="intensity-slider"
-            />
-            <div className="intensity-preview">
-              <p style={{ filter: `blur(${blurIntensity}px)` }}>
-                プレビューテキスト
-              </p>
-            </div>
-          </div>
+          <IntensityTab
+            blurIntensity={blurIntensity}
+            onIntensityChange={handleIntensityChange}
+          />
         )}
 
-        {/* 対象要素設定 */}
         {currentTab === 'elements' && (
-          <div className="setting-section">
-            <label className="setting-label">
-              ブラーを適用する要素を選択:
-            </label>
-            <div className="element-checkboxes">
-              {allElementTypes.map((element) => (
-                <label key={element} className="checkbox-label">
-                  <input
-                    type="checkbox"
-                    checked={targetElements.includes(element)}
-                    onChange={() => handleElementToggle(element)}
-                  />
-                  <span className="element-tag">&lt;{element}&gt;</span>
-                </label>
-              ))}
-            </div>
-          </div>
+          <ElementsTab
+            targetElements={targetElements}
+            onElementToggle={handleElementToggle}
+          />
         )}
 
-        {/* サイトルール設定 */}
         {currentTab === 'sites' && (
-          <div className="setting-section">
-            <label className="setting-label">
-              サイトごとの設定:
-            </label>
-            <div className="site-input-group">
-              <input
-                type="text"
-                value={newSitePattern}
-                onChange={(e) => setNewSitePattern(e.target.value)}
-                placeholder="例: example.com"
-                className="site-input"
-                onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
-                    handleAddSiteRule();
-                  }
-                }}
-              />
-              <button onClick={handleAddSiteRule} className="add-button">
-                追加
-              </button>
-              <button onClick={handleAddCurrentSite} className="current-site-button">
-                現在のサイト
-              </button>
-            </div>
-
-            <div className="site-list">
-              {siteList.length === 0 ? (
-                <p className="empty-message">
-                  サイトルールがありません。すべてのサイトで有効です。
-                </p>
-              ) : (
-                siteList.map((rule, index) => (
-                  <div key={index} className="site-rule-item">
-                    <label className="checkbox-label">
-                      <input
-                        type="checkbox"
-                        checked={rule.enabled}
-                        onChange={() => handleToggleSiteRule(index)}
-                      />
-                      <span className={`site-pattern ${rule.enabled ? '' : 'disabled'}`}>
-                        {rule.pattern}
-                      </span>
-                    </label>
-                    <button
-                      onClick={() => handleRemoveSiteRule(index)}
-                      className="remove-button"
-                    >
-                      削除
-                    </button>
-                  </div>
-                ))
-              )}
-            </div>
-          </div>
+          <SitesTab
+            siteList={siteList}
+            newSitePattern={newSitePattern}
+            onSitePatternChange={setNewSitePattern}
+            onAddSiteRule={handleAddSiteRule}
+            onRemoveSiteRule={handleRemoveSiteRule}
+            onToggleSiteRule={handleToggleSiteRule}
+            onAddCurrentSite={handleAddCurrentSite}
+          />
         )}
       </div>
 
