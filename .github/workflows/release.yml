@@ -5,6 +5,9 @@ on:
     branches:
       - master
 
+permissions:
+  contents: write
+
 jobs:
   check-version:
     name: Check Version Change
@@ -59,7 +62,7 @@ jobs:
       - name: Setup Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '18'
+          node-version: '22'
           cache: 'npm'
 
       - name: Install dependencies
@@ -103,7 +106,7 @@ jobs:
           tag_name: "v${{ needs.check-version.outputs.new_version }}"
           name: "Blur Focus v${{ needs.check-version.outputs.new_version }}"
           body: |
-            ## 🎉 Release v${{ needs.check-version.outputs.new_version }}
+            ## Release v${{ needs.check-version.outputs.new_version }}
 
             **コミット**: ${{ github.sha }}
             **ファイルサイズ**: ${{ steps.zip-info.outputs.size }}

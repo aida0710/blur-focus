@@ -1,6 +1,6 @@
 {
   "name": "blur-focus",
-  "version": "2.0.2",
+  "version": "2.0.3",
   "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
   "main": "index.js",
   "scripts": {
