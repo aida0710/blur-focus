@@ -1,4 +1,4 @@
-import { StyleInjector } from "./StyleInjector";
+import type { StyleInjector } from "./StyleInjector";
 
 /**
  * DOM変更の監視と動的要素への対応を担当するクラス
@@ -25,14 +25,12 @@ export class MutationHandler {
             const element = node as HTMLElement;
 
             // 要素自体がターゲットかチェック
-            if (element.matches && element.matches(this.targetSelector)) {
+            if (element.matches?.(this.targetSelector)) {
               this.styleInjector.applyBlurToElement(element);
             }
 
             // 子要素にターゲットがあるかチェック
-            const children = element.querySelectorAll<HTMLElement>(
-              this.targetSelector
-            );
+            const children = element.querySelectorAll<HTMLElement>(this.targetSelector);
             children.forEach((child) => {
               this.styleInjector.applyBlurToElement(child);
             });

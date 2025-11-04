@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
-import { BlurSettings, DEFAULT_SETTINGS, SiteRule } from "../../types";
-import { IntensityTab } from "./IntensityTab";
+import type { FC } from "react";
+import { useEffect, useState } from "react";
+import { type BlurSettings, DEFAULT_SETTINGS, type SiteRule } from "../../types";
 import { ElementsTab } from "./ElementsTab";
+import { IntensityTab } from "./IntensityTab";
 import { SitesTab } from "./SitesTab";
 
 interface SettingsPanelProps {
@@ -11,31 +12,18 @@ interface SettingsPanelProps {
 /**
  * 設定パネルコンポーネント（タブコンテナ）
  */
-export const SettingsPanel: React.FC<SettingsPanelProps> = ({
-  onSettingsChange,
-}) => {
-  const [blurIntensity, setBlurIntensity] = useState(
-    DEFAULT_SETTINGS.blurIntensity
-  );
-  const [targetElements, setTargetElements] = useState<string[]>(
-    DEFAULT_SETTINGS.targetElements
-  );
-  const [siteList, setSiteList] = useState<SiteRule[]>(
-    DEFAULT_SETTINGS.siteList
-  );
+export const SettingsPanel: FC<SettingsPanelProps> = ({ onSettingsChange }) => {
+  const [blurIntensity, setBlurIntensity] = useState(DEFAULT_SETTINGS.blurIntensity);
+  const [targetElements, setTargetElements] = useState<string[]>(DEFAULT_SETTINGS.targetElements);
+  const [siteList, setSiteList] = useState<SiteRule[]>(DEFAULT_SETTINGS.siteList);
   const [newSitePattern, setNewSitePattern] = useState("");
-  const [currentTab, setCurrentTab] = useState<
-    "intensity" | "elements" | "sites"
-  >("intensity");
+  const [currentTab, setCurrentTab] = useState<"intensity" | "elements" | "sites">("intensity");
 
   // 設定を読み込み
   useEffect(() => {
     chrome.storage.local.get(null, (result) => {
       if (chrome.runtime.lastError) {
-        console.error(
-          "[Blur Focus] Settings load error:",
-          chrome.runtime.lastError
-        );
+        console.error("[Blur Focus] Settings load error:", chrome.runtime.lastError);
         return;
       }
 
@@ -113,18 +101,21 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
     <div className="settings-panel">
       <div className="settings-tabs">
         <button
+          type="button"
           className={`tab-button ${currentTab === "intensity" ? "active" : ""}`}
           onClick={() => setCurrentTab("intensity")}
         >
           強度
         </button>
         <button
+          type="button"
           className={`tab-button ${currentTab === "elements" ? "active" : ""}`}
           onClick={() => setCurrentTab("elements")}
         >
           対象要素
         </button>
         <button
+          type="button"
           className={`tab-button ${currentTab === "sites" ? "active" : ""}`}
           onClick={() => setCurrentTab("sites")}
         >
@@ -134,17 +125,11 @@ export const SettingsPanel: React.FC<SettingsPanelProps> = ({
 
       <div className="settings-content">
         {currentTab === "intensity" && (
-          <IntensityTab
-            blurIntensity={blurIntensity}
-            onIntensityChange={handleIntensityChange}
-          />
+          <IntensityTab blurIntensity={blurIntensity} onIntensityChange={handleIntensityChange} />
         )}
 
         {currentTab === "elements" && (
-          <ElementsTab
-            targetElements={targetElements}
-            onElementToggle={handleElementToggle}
-          />
+          <ElementsTab targetElements={targetElements} onElementToggle={handleElementToggle} />
         )}
 
         {currentTab === "sites" && (

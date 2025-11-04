@@ -1,4 +1,4 @@
-import React from "react";
+import type { FC } from "react";
 
 interface ElementsTabProps {
   targetElements: string[];
@@ -8,10 +8,7 @@ interface ElementsTabProps {
 /**
  * 対象要素設定タブ
  */
-export const ElementsTab: React.FC<ElementsTabProps> = ({
-  targetElements,
-  onElementToggle,
-}) => {
+export const ElementsTab: FC<ElementsTabProps> = ({ targetElements, onElementToggle }) => {
   // 全要素タイプのリスト
   const allElementTypes = [
     "h1",
@@ -31,7 +28,7 @@ export const ElementsTab: React.FC<ElementsTabProps> = ({
 
   return (
     <div className="setting-section">
-      <label className="setting-label">ブラーを適用する要素を選択:</label>
+      <p className="setting-label">ブラーを適用する要素を選択:</p>
       <div className="element-checkboxes">
         {allElementTypes.map((element) => (
           <label key={element} className="checkbox-label">

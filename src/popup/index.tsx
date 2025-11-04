@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from "react";
+import type { BlurSettings, Message } from "../types";
 import { SettingsPanel } from "./components/SettingsPanel";
-import { BlurSettings, Message } from "../types";
 import "./styles/popup.css";
-import { createRoot, Root } from "react-dom/client";
+import { createRoot, type Root } from "react-dom/client";
 
 const Popup = () => {
   const [isBlur, setIsBlur] = useState(false);
@@ -133,6 +133,7 @@ const Popup = () => {
 
       <div className="controls">
         <button
+          type="button"
           onClick={handleToggle}
           className={`toggle-button ${isBlur ? "active" : ""}`}
         >
@@ -140,7 +141,6 @@ const Popup = () => {
         </button>
 
         <SettingsPanel onSettingsChange={handleSettingsChange} />
-
       </div>
     </div>
   );

@@ -64,20 +64,23 @@ npm run clean
 
 ### Code Quality
 ```bash
-# Run ESLint
+# Format code with Biome
+npm run format
+
+# Lint code with Biome
 npm run lint
 
-# Auto-fix ESLint issues
+# Auto-fix lint issues with Biome
 npm run lint:fix
+
+# Format + Lint + Organize imports (recommended)
+npm run check
 
 # TypeScript type check
 npm run type-check
 
 # Run Jest tests (passes even without tests)
 npm test
-
-# Format TypeScript/TSX files with Prettier
-npm run style
 ```
 
 ### Loading Extension in Browser
@@ -278,7 +281,7 @@ npm test  # Runs Jest (exits with code 0 even if no tests found)
 1. Checkout code
 2. Setup Node.js 22 with npm cache
 3. Install dependencies (`npm ci`)
-4. Run ESLint (`npm run lint`)
+4. Run Biome check (`npm run check`)
 5. Run TypeScript type check (`npm run type-check`)
 6. Run tests (`npm test`)
 
@@ -308,17 +311,29 @@ npm test  # Runs Jest (exits with code 0 even if no tests found)
 
 ## Code Style and Patterns
 
+### Code Formatting and Linting
+This project uses **Biome** (not Prettier/ESLint) for both formatting and linting.
+
+- **Formatter**: Biome with double quotes, 2-space indentation, 100 line width
+- **Linter**: Biome with recommended rules + React/TypeScript specific rules
+- **Import organization**: Automatically sorted by Biome
+- **Configuration**: See `biome.json` for all rules
+
+Run `npm run check` before committing to format, lint, and organize imports.
+
 ### TypeScript
 - Strict mode enabled
 - Explicit types for function parameters and return values
 - Use `interface` for object shapes
 - Prefix unused parameters with `_` (e.g., `_response`)
+- Biome allows `any` with warnings (use sparingly)
 
 ### React
 - Functional components with hooks
 - `useState` for local state
 - `useEffect` for side effects
 - Event handlers use arrow functions for correct `this` binding
+- No array index keys (Biome warns)
 
 ### Chrome APIs
 - Always handle `chrome.runtime.lastError`

@@ -7,9 +7,9 @@
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family:
+    -apple-system, BlinkMacSystemFont, "Segoe UI", "Roboto", "Oxygen", "Ubuntu", "Cantarell",
+    "Fira Sans", "Droid Sans", "Helvetica Neue", sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
@@ -231,7 +231,7 @@ body {
 }
 
 .element-tag {
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   color: #007bff;
 }
 
@@ -310,7 +310,7 @@ body {
 
 .site-pattern {
   font-size: 13px;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   color: #333;
 }
 
@@ -373,7 +373,7 @@ body {
   background: #f4f4f4;
   border: 1px solid #ccc;
   border-radius: 3px;
-  font-family: 'Courier New', monospace;
+  font-family: "Courier New", monospace;
   font-size: 11px;
   margin: 0 2px;
 }

@@ -1,8 +1,8 @@
-import { BlurSettings, Message } from "../types";
-import { StyleInjector } from "./StyleInjector";
+import type { BlurSettings, Message } from "../types";
 import { EventHandler } from "./EventHandler";
 import { MutationHandler } from "./MutationHandler";
 import { StorageManager } from "./StorageManager";
+import { StyleInjector } from "./StyleInjector";
 import { buildTargetSelector, isSiteEnabled } from "./utils";
 
 /**
@@ -53,9 +53,7 @@ export class BlurFocusManager {
 
       // キーボードショートカットのリスナー
       this.setupKeyboardShortcut();
-      console.log(
-        "[Blur Focus] キーボードショートカットリスナーを設定しました"
-      );
+      console.log("[Blur Focus] キーボードショートカットリスナーを設定しました");
     } catch (error) {
       console.error("[Blur Focus] Initialization error:", error);
     }
@@ -130,9 +128,7 @@ export class BlurFocusManager {
       return;
     }
 
-    const elements = document.querySelectorAll<HTMLElement>(
-      this.targetSelector
-    );
+    const elements = document.querySelectorAll<HTMLElement>(this.targetSelector);
     elements.forEach((element) => {
       this.styleInjector.applyBlurToElement(element);
     });
@@ -142,32 +138,25 @@ export class BlurFocusManager {
    * メッセージリスナーを設定（リアルタイム更新）
    */
   private setupMessageListener(): void {
-    chrome.runtime.onMessage.addListener(
-      (message: Message, _sender, sendResponse) => {
-        if (
-          message.action === "toggleBlur" ||
-          message.action === "updateSettings"
-        ) {
-          this.handleSettingsUpdate(message.settings || {})
-            .then(() => {
-              sendResponse({ success: true });
-            })
-            .catch((error) => {
-              console.error("[Blur Focus] Settings update error:", error);
-              sendResponse({ success: false, error: error.message });
-            });
-          return true; // 非同期レスポンスを示す
-        }
+    chrome.runtime.onMessage.addListener((message: Message, _sender, sendResponse) => {
+      if (message.action === "toggleBlur" || message.action === "updateSettings") {
+        this.handleSettingsUpdate(message.settings || {})
+          .then(() => {
+            sendResponse({ success: true });
+          })
+          .catch((error) => {
+            console.error("[Blur Focus] Settings update error:", error);
+            sendResponse({ success: false, error: error.message });
+          });
+        return true; // 非同期レスポンスを示す
       }
-    );
+    });
   }
 
   /**
    * 設定更新を処理
    */
-  private async handleSettingsUpdate(
-    partialSettings: Partial<BlurSettings>
-  ): Promise<void> {
+  private async handleSettingsUpdate(partialSettings: Partial<BlurSettings>): Promise<void> {
     // 設定をマージ
     this.settings = {
       ...this.settings,
@@ -199,11 +188,7 @@ export class BlurFocusManager {
    */
   private setupKeyboardShortcut(): void {
     document.addEventListener("keydown", (event: KeyboardEvent) => {
-      if (
-        (event.ctrlKey || event.metaKey) &&
-        event.shiftKey &&
-        event.key.toLowerCase() === "f"
-      ) {
+      if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key.toLowerCase() === "f") {
         event.preventDefault();
         this.toggleBlur();
       }

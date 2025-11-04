@@ -1,4 +1,4 @@
-import { StyleInjector } from "./StyleInjector";
+import type { StyleInjector } from "./StyleInjector";
 
 /**
  * マウスイベントの処理を担当するクラス

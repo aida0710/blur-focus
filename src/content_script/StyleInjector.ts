@@ -54,10 +54,7 @@ export class StyleInjector {
    * 要素からブラークラスを削除
    */
   removeBlurFromElement(element: HTMLElement): void {
-    element.classList.remove(
-      StyleInjector.BLUR_CLASS,
-      StyleInjector.HOVER_CLASS
-    );
+    element.classList.remove(StyleInjector.BLUR_CLASS, StyleInjector.HOVER_CLASS);
   }
 
   /**
@@ -66,10 +63,7 @@ export class StyleInjector {
   removeBlurFromAllElements(): void {
     const elements = document.querySelectorAll(`.${StyleInjector.BLUR_CLASS}`);
     elements.forEach((element) => {
-      element.classList.remove(
-        StyleInjector.BLUR_CLASS,
-        StyleInjector.HOVER_CLASS
-      );
+      element.classList.remove(StyleInjector.BLUR_CLASS, StyleInjector.HOVER_CLASS);
     });
   }
 

@@ -1,4 +1,4 @@
-import { SiteRule } from "../types";
+import type { SiteRule } from "../types";
 
 /**
  * URLパターンマッチング（シンプル版）

@@ -1,4 +1,4 @@
-import { BlurSettings, DEFAULT_SETTINGS, StorageResult } from "../types";
+import { type BlurSettings, DEFAULT_SETTINGS, type StorageResult } from "../types";
 
 /**
  * Chrome Storageとの通信を担当するクラス
@@ -18,8 +18,7 @@ export class StorageManager {
         const settings: BlurSettings = {
           isBlur: result.isBlur ?? DEFAULT_SETTINGS.isBlur,
           blurIntensity: result.blurIntensity ?? DEFAULT_SETTINGS.blurIntensity,
-          targetElements:
-            result.targetElements ?? DEFAULT_SETTINGS.targetElements,
+          targetElements: result.targetElements ?? DEFAULT_SETTINGS.targetElements,
           siteList: result.siteList ?? DEFAULT_SETTINGS.siteList,
         };
 

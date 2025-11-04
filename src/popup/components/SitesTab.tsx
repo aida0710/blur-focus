@@ -1,5 +1,5 @@
-import React from "react";
-import { SiteRule } from "../../types";
+import type { FC } from "react";
+import type { SiteRule } from "../../types";
 
 interface SitesTabProps {
   siteList: SiteRule[];
@@ -14,7 +14,7 @@ interface SitesTabProps {
 /**
  * サイトルール設定タブ
  */
-export const SitesTab: React.FC<SitesTabProps> = ({
+export const SitesTab: FC<SitesTabProps> = ({
   siteList,
   newSitePattern,
   onSitePatternChange,
@@ -31,7 +31,7 @@ export const SitesTab: React.FC<SitesTabProps> = ({
 
   return (
     <div className="setting-section">
-      <label className="setting-label">サイトごとの設定:</label>
+      <p className="setting-label">サイトごとの設定:</p>
       <div className="site-input-group">
         <input
           type="text"
@@ -41,35 +41,32 @@ export const SitesTab: React.FC<SitesTabProps> = ({
           className="site-input"
           onKeyDown={handleKeyDown}
         />
-        <button onClick={onAddSiteRule} className="add-button">
+        <button type="button" onClick={onAddSiteRule} className="add-button">
           追加
         </button>
-        <button onClick={onAddCurrentSite} className="current-site-button">
+        <button type="button" onClick={onAddCurrentSite} className="current-site-button">
           現在のサイト
         </button>
       </div>
 
       <div className="site-list">
         {siteList.length === 0 ? (
-          <p className="empty-message">
-            サイトルールがありません。すべてのサイトで有効です。
-          </p>
+          <p className="empty-message">サイトルールがありません。すべてのサイトで有効です。</p>
         ) : (
           siteList.map((rule, index) => (
-            <div key={index} className="site-rule-item">
+            <div key={rule.pattern} className="site-rule-item">
               <label className="checkbox-label">
                 <input
                   type="checkbox"
                   checked={rule.enabled}
                   onChange={() => onToggleSiteRule(index)}
                 />
-                <span
-                  className={`site-pattern ${rule.enabled ? "" : "disabled"}`}
-                >
+                <span className={`site-pattern ${rule.enabled ? "" : "disabled"}`}>
                   {rule.pattern}
                 </span>
               </label>
               <button
+                type="button"
                 onClick={() => onRemoveSiteRule(index)}
                 className="remove-button"
               >
