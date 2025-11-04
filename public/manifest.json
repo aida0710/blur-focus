@@ -25,8 +25,8 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+B",
-        "mac": "Command+Shift+B"
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
       }
     }
   },

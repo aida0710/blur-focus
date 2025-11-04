@@ -11,7 +11,7 @@ Blur Focus is a Chrome extension (compatible with Chromium-based browsers) that 
 - ✅ **Customizable blur intensity** - Adjustable from 2px to 15px
 - ✅ **Element type selection** - Choose which HTML elements to blur
 - ✅ **Per-site configuration** - Enable/disable blur for specific websites
-- ✅ **Keyboard shortcuts** - `Ctrl+Shift+B` (Mac: `⌘+Shift+B`) to toggle
+- ✅ **Keyboard shortcuts** - `Ctrl+Shift+F` (Mac: `⌘+Shift+F`) to toggle
 - ✅ **Dynamic element support** - Automatically handles dynamically added elements (SPAs)
 - ✅ **Performance optimized** - Event delegation and efficient DOM handling
 
@@ -253,8 +253,8 @@ Defined in `public/manifest.json`:
 - `host_permissions: <all_urls>` - Required for content script injection on all pages
 
 **Keyboard Commands:**
-- `_execute_action` with `Ctrl+Shift+B` / `Command+Shift+B` - Opens popup (native Chrome behavior)
-- Content script also listens for `Ctrl+Shift+B` to toggle blur without opening popup
+- `_execute_action` with `Ctrl+Shift+F` / `Command+Shift+F` - Opens popup (native Chrome behavior)
+- Content script also listens for `Ctrl+Shift+F` to toggle blur without opening popup
 
 ## Testing
 

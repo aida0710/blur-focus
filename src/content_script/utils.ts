@@ -1,11 +1,11 @@
-import { SiteRule } from '../types';
+import { SiteRule } from "../types";
 
 /**
  * URLパターンマッチング（シンプル版）
  * ワイルドカードを正規表現に変換してマッチングを行う
  */
 export function matchPattern(url: string, pattern: string): boolean {
-  const regexPattern = pattern.replace(/\*/g, '.*').replace(/\?/g, '.');
+  const regexPattern = pattern.replace(/\*/g, ".*").replace(/\?/g, ".");
 
   try {
     const regex = new RegExp(regexPattern);
@@ -45,5 +45,5 @@ export function isSiteEnabled(siteList: SiteRule[]): boolean {
  * 対象要素の配列からCSSセレクターを生成
  */
 export function buildTargetSelector(targetElements: string[]): string {
-  return targetElements.join(',');
+  return targetElements.join(",");
 }

@@ -1,11 +1,11 @@
-import { StyleInjector } from './StyleInjector';
+import { StyleInjector } from "./StyleInjector";
 
 /**
  * DOM変更の監視と動的要素への対応を担当するクラス
  */
 export class MutationHandler {
   private observer: MutationObserver | null = null;
-  private targetSelector: string = '';
+  private targetSelector: string = "";
   private styleInjector: StyleInjector;
 
   constructor(styleInjector: StyleInjector) {
@@ -30,7 +30,9 @@ export class MutationHandler {
             }
 
             // 子要素にターゲットがあるかチェック
-            const children = element.querySelectorAll<HTMLElement>(this.targetSelector);
+            const children = element.querySelectorAll<HTMLElement>(
+              this.targetSelector
+            );
             children.forEach((child) => {
               this.styleInjector.applyBlurToElement(child);
             });

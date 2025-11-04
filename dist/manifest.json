@@ -1,6 +1,6 @@
 {
-  "name": "blur-focus",
-  "description": "ホバーしているテキスト以外をすべてブラー表示にすることで、目移りを防ぐ",
+  "name": "BlurFocus",
+  "description": "ホバーしているテキスト以外をぼかすことで、読書中の視線の滑りを防ぎ、集中力を高めるChrome拡張機能",
   "version": "1.0",
   "manifest_version": 3,
 
@@ -25,8 +25,8 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Ctrl+Shift+B",
-        "mac": "Command+Shift+B"
+        "default": "Ctrl+Shift+F",
+        "mac": "Command+Shift+F"
       }
     }
   },

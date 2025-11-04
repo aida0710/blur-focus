@@ -32,14 +32,28 @@ export interface BlurSettings {
 export const DEFAULT_SETTINGS: BlurSettings = {
   isBlur: false,
   blurIntensity: 5,
-  targetElements: ['h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'p', 'a', 'span', 'ul', 'li', 'label', 'code'],
+  targetElements: [
+    "h1",
+    "h2",
+    "h3",
+    "h4",
+    "h5",
+    "h6",
+    "p",
+    "a",
+    "span",
+    "ul",
+    "li",
+    "label",
+    "code",
+  ],
   siteList: [],
 };
 
 /**
  * Content scriptへのメッセージタイプ
  */
-export type MessageAction = 'toggleBlur' | 'updateSettings';
+export type MessageAction = "toggleBlur" | "updateSettings";
 
 /**
  * Content scriptへ送信するメッセージ

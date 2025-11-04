@@ -1,4 +1,4 @@
-import { StyleInjector } from './StyleInjector';
+import { StyleInjector } from "./StyleInjector";
 
 /**
  * マウスイベントの処理を担当するクラス
@@ -15,16 +15,16 @@ export class EventHandler {
    * イベントデリゲーションを設定
    */
   setupEventListeners(): void {
-    document.addEventListener('mouseover', this.handleMouseOver);
-    document.addEventListener('mouseout', this.handleMouseOut);
+    document.addEventListener("mouseover", this.handleMouseOver);
+    document.addEventListener("mouseout", this.handleMouseOut);
   }
 
   /**
    * イベントリスナーを削除
    */
   removeEventListeners(): void {
-    document.removeEventListener('mouseover', this.handleMouseOver);
-    document.removeEventListener('mouseout', this.handleMouseOut);
+    document.removeEventListener("mouseover", this.handleMouseOver);
+    document.removeEventListener("mouseout", this.handleMouseOut);
   }
 
   /**

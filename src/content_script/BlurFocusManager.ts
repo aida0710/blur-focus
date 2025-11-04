@@ -1,21 +1,21 @@
-import { BlurSettings, Message } from '../types';
-import { StyleInjector } from './StyleInjector';
-import { EventHandler } from './EventHandler';
-import { MutationHandler } from './MutationHandler';
-import { StorageManager } from './StorageManager';
-import { buildTargetSelector, isSiteEnabled } from './utils';
+import { BlurSettings, Message } from "../types";
+import { StyleInjector } from "./StyleInjector";
+import { EventHandler } from "./EventHandler";
+import { MutationHandler } from "./MutationHandler";
+import { StorageManager } from "./StorageManager";
+import { buildTargetSelector, isSiteEnabled } from "./utils";
 
 /**
  * ブラーフォーカス機能全体を管理するメインクラス
  */
 export class BlurFocusManager {
   private settings!: BlurSettings;
-  private styleInjector: StyleInjector;
+  private readonly styleInjector: StyleInjector;
   private eventHandler: EventHandler;
   private mutationHandler: MutationHandler;
   private storageManager: StorageManager;
   private isActive: boolean = false;
-  private targetSelector: string = '';
+  private targetSelector: string = "";
 
   constructor() {
     this.styleInjector = new StyleInjector();
@@ -31,11 +31,15 @@ export class BlurFocusManager {
    */
   private async init(): Promise<void> {
     try {
+      console.log("[Blur Focus] 初期化開始");
+
       // 設定を読み込み
       await this.loadSettings();
+      console.log("[Blur Focus] 設定読み込み完了:", this.settings);
 
       // サイトルールのチェック
       if (!isSiteEnabled(this.settings.siteList)) {
+        console.log("[Blur Focus] このサイトでは無効です");
         return;
       }
 
@@ -49,8 +53,11 @@ export class BlurFocusManager {
 
       // キーボードショートカットのリスナー
       this.setupKeyboardShortcut();
+      console.log(
+        "[Blur Focus] キーボードショートカットリスナーを設定しました"
+      );
     } catch (error) {
-      console.error('[Blur Focus] Initialization error:', error);
+      console.error("[Blur Focus] Initialization error:", error);
     }
   }
 
@@ -123,7 +130,9 @@ export class BlurFocusManager {
       return;
     }
 
-    const elements = document.querySelectorAll<HTMLElement>(this.targetSelector);
+    const elements = document.querySelectorAll<HTMLElement>(
+      this.targetSelector
+    );
     elements.forEach((element) => {
       this.styleInjector.applyBlurToElement(element);
     });
@@ -133,25 +142,32 @@ export class BlurFocusManager {
    * メッセージリスナーを設定（リアルタイム更新）
    */
   private setupMessageListener(): void {
-    chrome.runtime.onMessage.addListener((message: Message, _sender, sendResponse) => {
-      if (message.action === 'toggleBlur' || message.action === 'updateSettings') {
-        this.handleSettingsUpdate(message.settings || {})
-          .then(() => {
-            sendResponse({ success: true });
-          })
-          .catch((error) => {
-            console.error('[Blur Focus] Settings update error:', error);
-            sendResponse({ success: false, error: error.message });
-          });
-        return true; // 非同期レスポンスを示す
+    chrome.runtime.onMessage.addListener(
+      (message: Message, _sender, sendResponse) => {
+        if (
+          message.action === "toggleBlur" ||
+          message.action === "updateSettings"
+        ) {
+          this.handleSettingsUpdate(message.settings || {})
+            .then(() => {
+              sendResponse({ success: true });
+            })
+            .catch((error) => {
+              console.error("[Blur Focus] Settings update error:", error);
+              sendResponse({ success: false, error: error.message });
+            });
+          return true; // 非同期レスポンスを示す
+        }
       }
-    });
+    );
   }
 
   /**
    * 設定更新を処理
    */
-  private async handleSettingsUpdate(partialSettings: Partial<BlurSettings>): Promise<void> {
+  private async handleSettingsUpdate(
+    partialSettings: Partial<BlurSettings>
+  ): Promise<void> {
     // 設定をマージ
     this.settings = {
       ...this.settings,
@@ -182,9 +198,12 @@ export class BlurFocusManager {
    * キーボードショートカットのリスナー
    */
   private setupKeyboardShortcut(): void {
-    document.addEventListener('keydown', (event: KeyboardEvent) => {
-      // Ctrl+Shift+B (Mac: Command+Shift+B)
-      if ((event.ctrlKey || event.metaKey) && event.shiftKey && event.key === 'B') {
+    document.addEventListener("keydown", (event: KeyboardEvent) => {
+      if (
+        (event.ctrlKey || event.metaKey) &&
+        event.shiftKey &&
+        event.key.toLowerCase() === "f"
+      ) {
         event.preventDefault();
         this.toggleBlur();
       }
@@ -208,7 +227,7 @@ export class BlurFocusManager {
         this.deactivate();
       }
     } catch (error) {
-      console.error('[Blur Focus] Storage error:', error);
+      console.error("[Blur Focus] Storage error:", error);
     }
   }
 }

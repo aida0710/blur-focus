@@ -1,21 +1,20 @@
-import React, { useEffect, useState } from 'react';
-import { createRoot, Root } from 'react-dom/client';
-import { SettingsPanel } from './components/SettingsPanel';
-import { BlurSettings, Message } from '../types';
-import './styles/popup.css';
+import React, { useEffect, useState } from "react";
+import { SettingsPanel } from "./components/SettingsPanel";
+import { BlurSettings, Message } from "../types";
+import "./styles/popup.css";
+import { createRoot, Root } from "react-dom/client";
 
 const Popup = () => {
   const [isBlur, setIsBlur] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
-  const [showSettings, setShowSettings] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   // 初期設定を読み込み
   useEffect(() => {
-    chrome.storage.local.get(['isBlur'], (result) => {
+    chrome.storage.local.get(["isBlur"], (result) => {
       if (chrome.runtime.lastError) {
-        setError('設定の読み込みに失敗しました');
-        console.error('[Blur Focus] Storage error:', chrome.runtime.lastError);
+        setError("設定の読み込みに失敗しました");
+        console.error("[Blur Focus] Storage error:", chrome.runtime.lastError);
         setIsLoading(false);
         return;
       }
@@ -45,10 +44,13 @@ const Popup = () => {
       });
 
       // 現在のタブにメッセージを送信（リアルタイム更新）
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const tabs = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       if (tabs[0]?.id) {
         const message: Message = {
-          action: 'toggleBlur',
+          action: "toggleBlur",
           settings: { isBlur: newIsBlur },
         };
 
@@ -56,13 +58,16 @@ const Popup = () => {
           if (chrome.runtime.lastError) {
             // Content scriptが読み込まれていない場合は無視
             // （例：chrome://pages や拡張機能ページ）
-            console.log('[Blur Focus] Content script not available:', chrome.runtime.lastError.message);
+            console.log(
+              "[Blur Focus] Content script not available:",
+              chrome.runtime.lastError.message
+            );
           }
         });
       }
     } catch (err) {
-      setError('設定の保存に失敗しました');
-      console.error('[Blur Focus] Toggle error:', err);
+      setError("設定の保存に失敗しました");
+      console.error("[Blur Focus] Toggle error:", err);
       // エラー時は状態を元に戻す
       setIsBlur(!newIsBlur);
     }
@@ -83,22 +88,28 @@ const Popup = () => {
       });
 
       // 現在のタブにメッセージを送信
-      const tabs = await chrome.tabs.query({ active: true, currentWindow: true });
+      const tabs = await chrome.tabs.query({
+        active: true,
+        currentWindow: true,
+      });
       if (tabs[0]?.id) {
         const message: Message = {
-          action: 'updateSettings',
+          action: "updateSettings",
           settings: settings,
         };
 
         chrome.tabs.sendMessage(tabs[0].id, message, (_response) => {
           if (chrome.runtime.lastError) {
-            console.log('[Blur Focus] Content script not available:', chrome.runtime.lastError.message);
+            console.log(
+              "[Blur Focus] Content script not available:",
+              chrome.runtime.lastError.message
+            );
           }
         });
       }
     } catch (err) {
-      setError('設定の保存に失敗しました');
-      console.error('[Blur Focus] Settings update error:', err);
+      setError("設定の保存に失敗しました");
+      console.error("[Blur Focus] Settings update error:", err);
     }
   };
 
@@ -113,48 +124,29 @@ const Popup = () => {
   return (
     <div className="popup-container">
       <div className="header">
-        <h1 className="title" style={{ filter: isBlur ? 'blur(5px)' : 'none' }}>
+        <h1 className="title" style={{ filter: isBlur ? "blur(5px)" : "none" }}>
           Blur Focus
         </h1>
-        <p className="status">{isBlur ? 'ブラー有効' : 'ブラー無効'}</p>
       </div>
 
-      {error && (
-        <div className="error-message">
-          {error}
-        </div>
-      )}
+      {error && <div className="error-message">{error}</div>}
 
       <div className="controls">
         <button
           onClick={handleToggle}
-          className={`toggle-button ${isBlur ? 'active' : ''}`}
+          className={`toggle-button ${isBlur ? "active" : ""}`}
         >
-          {isBlur ? 'ブラーを無効にする' : 'ブラーを有効にする'}
+          {isBlur ? "ブラーを無効にする" : "ブラーを有効にする"}
         </button>
 
-        <button
-          onClick={() => setShowSettings(!showSettings)}
-          className="settings-button"
-        >
-          {showSettings ? '設定を閉じる' : '設定を開く'}
-        </button>
-      </div>
-
-      {showSettings && (
         <SettingsPanel onSettingsChange={handleSettingsChange} />
-      )}
 
-      <div className="footer">
-        <p className="info-text">
-          変更は即座に反映されます
-        </p>
       </div>
     </div>
   );
 };
 
-const root: Root = createRoot(document.getElementById('root')!);
+const root: Root = createRoot(document.getElementById("root")!);
 
 root.render(
   <React.StrictMode>

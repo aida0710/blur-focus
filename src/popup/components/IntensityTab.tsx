@@ -1,4 +1,4 @@
-import React from 'react';
+import React from "react";
 
 interface IntensityTabProps {
   blurIntensity: number;
@@ -14,9 +14,7 @@ export const IntensityTab: React.FC<IntensityTabProps> = ({
 }) => {
   return (
     <div className="setting-section">
-      <label className="setting-label">
-        ブラー強度: {blurIntensity}px
-      </label>
+      <label className="setting-label">ブラー強度: {blurIntensity}px</label>
       <input
         type="range"
         min="2"
@@ -26,9 +24,7 @@ export const IntensityTab: React.FC<IntensityTabProps> = ({
         className="intensity-slider"
       />
       <div className="intensity-preview">
-        <p style={{ filter: `blur(${blurIntensity}px)` }}>
-          プレビューテキスト
-        </p>
+        <p style={{ filter: `blur(${blurIntensity}px)` }}>プレビューテキスト</p>
       </div>
     </div>
   );

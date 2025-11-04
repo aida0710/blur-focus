@@ -1,5 +1,5 @@
-import React from 'react';
-import { SiteRule } from '../../types';
+import React from "react";
+import { SiteRule } from "../../types";
 
 interface SitesTabProps {
   siteList: SiteRule[];
@@ -24,16 +24,14 @@ export const SitesTab: React.FC<SitesTabProps> = ({
   onAddCurrentSite,
 }) => {
   const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
-    if (e.key === 'Enter') {
+    if (e.key === "Enter") {
       onAddSiteRule();
     }
   };
 
   return (
     <div className="setting-section">
-      <label className="setting-label">
-        サイトごとの設定:
-      </label>
+      <label className="setting-label">サイトごとの設定:</label>
       <div className="site-input-group">
         <input
           type="text"
@@ -65,7 +63,9 @@ export const SitesTab: React.FC<SitesTabProps> = ({
                   checked={rule.enabled}
                   onChange={() => onToggleSiteRule(index)}
                 />
-                <span className={`site-pattern ${rule.enabled ? '' : 'disabled'}`}>
+                <span
+                  className={`site-pattern ${rule.enabled ? "" : "disabled"}`}
+                >
                   {rule.pattern}
                 </span>
               </label>

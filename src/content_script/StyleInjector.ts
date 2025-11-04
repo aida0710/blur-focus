@@ -2,9 +2,9 @@
  * CSSスタイルの注入と管理を担当するクラス
  */
 export class StyleInjector {
-  private static readonly STYLE_ID = 'blur-focus-styles';
-  private static readonly BLUR_CLASS = 'blur-focus-element';
-  private static readonly HOVER_CLASS = 'blur-focus-hover';
+  private static readonly STYLE_ID = "blur-focus-styles";
+  private static readonly BLUR_CLASS = "blur-focus-element";
+  private static readonly HOVER_CLASS = "blur-focus-hover";
 
   /**
    * ページにCSSスタイルを注入
@@ -16,7 +16,7 @@ export class StyleInjector {
       existingStyle.remove();
     }
 
-    const style = document.createElement('style');
+    const style = document.createElement("style");
     style.id = StyleInjector.STYLE_ID;
     style.textContent = `
       .${StyleInjector.BLUR_CLASS} {
@@ -54,7 +54,10 @@ export class StyleInjector {
    * 要素からブラークラスを削除
    */
   removeBlurFromElement(element: HTMLElement): void {
-    element.classList.remove(StyleInjector.BLUR_CLASS, StyleInjector.HOVER_CLASS);
+    element.classList.remove(
+      StyleInjector.BLUR_CLASS,
+      StyleInjector.HOVER_CLASS
+    );
   }
 
   /**
@@ -63,7 +66,10 @@ export class StyleInjector {
   removeBlurFromAllElements(): void {
     const elements = document.querySelectorAll(`.${StyleInjector.BLUR_CLASS}`);
     elements.forEach((element) => {
-      element.classList.remove(StyleInjector.BLUR_CLASS, StyleInjector.HOVER_CLASS);
+      element.classList.remove(
+        StyleInjector.BLUR_CLASS,
+        StyleInjector.HOVER_CLASS
+      );
     });
   }
 
