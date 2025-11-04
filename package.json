@@ -1,6 +1,6 @@
 {
-  "name": "Blur Focus",
-  "version": "2.0.5",
+  "name": "blur-focus",
+  "version": "2.0.6",
   "description": "ホバーしているテキスト以外をぼかすことで、読書中の視線の滑りを防ぎ、集中力を高めるChrome拡張機能",
   "main": "index.js",
   "scripts": {
